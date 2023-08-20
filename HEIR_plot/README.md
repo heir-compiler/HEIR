@@ -43,8 +43,8 @@ cmake --build build -j
 # Build HALO
 cd /home/NDSS_Artifact/HALO/
 mkdir build && cd build
-cmake .. -DCMAKE_PREFIX_PATH=/home/NDSS_Artifact/SEAL/build/
--DCMAKE_BUILD_TYPE=Release
+cmake .. -DCMAKE_PREFIX_PATH=/home/NDSS_Artifact/SEAL/build/ \
+    -DCMAKE_BUILD_TYPE=Release
 cmake --build . --target all -j
 ```
 

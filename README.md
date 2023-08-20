@@ -6,6 +6,10 @@ instructions, HEIR can transform these instructions into
 homomorphic operators supported in either Ring-LWE based schemes (CKKS)
 or LWE based schemes (TFHE).
 
+> **Note:
+> This repository only contains the IR part of HEIR, to evaluate the
+> benchmarks, please use the [Docker](https://hub.docker.com/repository/docker/zhaozian/heir/general)
+> version of HEIR.
 # Repository's Structure
 The repository is organized as follow:
 ```
