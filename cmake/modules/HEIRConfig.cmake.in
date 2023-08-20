@@ -1,0 +1,57 @@
+# Authors: HECO
+# Modified by Zian Zhao
+# Copyright:
+# Copyright (c) 2020 ETH Zurich.
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# This file allows users to call find_package(HEIR) and pick up our targets.
+
+@HEIR_CONFIG_CODE@
+
+find_package(MLIR REQUIRED CONFIG
+             HINTS "@HEIR_CONFIG_MLIR_CMAKE_DIR@")
+
+set(HEIR_EXPORTED_TARGETS "@HEIR_EXPORTS@")
+set(HEIR_CMAKE_DIR "@HEIR_CONFIG_CMAKE_DIR@")
+set(HEIR_BINARY_DIR "@HEIR_CONFIG_BINARY_DIR@")
+set(HEIR_INCLUDE_DIRS "@HEIR_CONFIG_INCLUDE_DIRS@")
+set(HEIR_LIBRARY_DIRS "@HEIR_CONFIG_LIBRARY_DIRS@")
+set(HEIR_TOOLS_DIR "@HEIR_CONFIG_TOOLS_DIR@")
+
+set_property(GLOBAL PROPERTY HEIR_ALL_LIBS "@HEIR_ALL_LIBS@")
+set_property(GLOBAL PROPERTY HEIR_DIALECT_LIBS "@HEIR_DIALECT_LIBS@")
+set_property(GLOBAL PROPERTY HEIR_CONVERSION_LIBS "@HEIR_CONVERSION_LIBS@")
+set_property(GLOBAL PROPERTY HEIR_TRANSLATION_LIBS "@HEIR_TRANSLATION_LIBS@")
+
+# Provide all our library targets to users.
+@HEIR_CONFIG_INCLUDE_EXPORTS@
+
+# By creating these targets here, subprojects that depend on HEIR's
+# tablegen-generated headers can always depend on these targets whether building
+# in-tree with HEIR or not.
+if(NOT TARGET heir-tablegen-targets)
+  add_custom_target(heir-tablegen-targets)
+endif()
+if(NOT TARGET heir-headers)
+  add_custom_target(heir-headers)
+endif()
+if(NOT TARGET heir-generic-headers)
+  add_custom_target(heir-generic-headers)
+endif()
+if(NOT TARGET heir-doc)
+  add_custom_target(heir-doc)
+endif()

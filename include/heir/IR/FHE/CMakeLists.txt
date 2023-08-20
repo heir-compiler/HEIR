@@ -1,0 +1,1 @@
+add_heir_dialect(HEIR heir)
